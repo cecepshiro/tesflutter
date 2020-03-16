@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Network {
   //Within the Network class, define String _url = 'http://localhost:8000/api/v1 this is basically the BASE_URL for our Laravel API.
-  final String _url = 'http://127.0.0.1:8000/api/auth';
+  final String _url = 'http://testflutter.compunerds.id/api';
 
   //if you are using android studio emulator, change localhost to 10.0.2.2
 

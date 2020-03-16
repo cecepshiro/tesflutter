@@ -1,9 +1,20 @@
+import 'dart:io';
+import 'package:bioapp/view/biodata/HomeScreen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bioapp/screen/login.dart';
 import 'package:bioapp/screen/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp());
+
+void main() {
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
+    if (kReleaseMode) exit(1);
+  };
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -24,7 +35,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: CheckAuth(),
+      // home: CheckAuth(),
+      home: HomeScreen(),
     );
   }
 }

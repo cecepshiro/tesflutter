@@ -174,7 +174,7 @@ class _LoginState extends State<Login> {
     });
     var data = {'email': email, 'password': password};
 
-    var res = await Network().authData(data, '/login');
+    var res = await Network().authData(data, '/auth/login');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();

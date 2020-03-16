@@ -238,7 +238,7 @@ class _RegisterState extends State<Register> {
       'lname': lname
     };
 
-    var res = await Network().authData(data, '/register');
+    var res = await Network().authData(data, '/auth/register');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
