@@ -33,7 +33,7 @@ class _FormScreenState extends State<FormScreen> {
     return Scaffold(
       key: _scaffoldState,
       appBar: AppBar(
-        backgroundColor: Colors.orange[400],
+        backgroundColor: Colors.green[400],
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           widget.biodata == null ? "Form Tambah" : "Form Update",
@@ -126,7 +126,7 @@ class _FormScreenState extends State<FormScreen> {
                     widget.biodata == null ? "Simpan" : "Ubah",
                     style: TextStyle(color: Colors.white),
                   ),
-                  color: Colors.orange[400],
+                  color: Colors.blue[400],
                 ),
               ],
             )

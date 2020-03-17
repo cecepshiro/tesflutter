@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'Bioapp',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.orange[400],
+        backgroundColor: Colors.green[400],
         automaticallyImplyLeading: true,
         actions: <Widget>[
           GestureDetector(
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               RaisedButton(
                                 child: Text("Hapus",
                                     style: TextStyle(color: Colors.white)),
-                                color: Colors.orange[400],
+                                color: Colors.red[400],
                                 onPressed: () {
                                   // int tmpId = biodata.id;
                                   // String id = tmpId.toString();
