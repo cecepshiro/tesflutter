@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:bioapp/service/ApiServiceAuth.dart';
 import 'package:flutter/material.dart';
-import 'package:bioapp/screen/login.dart';
-import 'package:bioapp/network_utils/api.dart';
+import 'package:bioapp/view/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
   }
 
   void logout() async {
-    var res = await Network().getData('/auth/logout');
+    var res = await ApiServiceAuth().getData('/auth/logout');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();

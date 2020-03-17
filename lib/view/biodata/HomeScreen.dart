@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:bioapp/service/ApiService.dart';
+import 'package:bioapp/service/ApiServiceAuth.dart';
+import 'package:bioapp/view/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:bioapp/view/biodata/FormScreen.dart';
 import 'package:bioapp/model/Biodata.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ApiService api = new ApiService();
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
@@ -29,14 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return FormScreen();
-              }));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //   return FormScreen();
+              // }));
+              logout();
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: Icon(
-                Icons.add,
+                Icons.power_settings_new,
                 color: Colors.white,
               ),
             ),
@@ -69,6 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          // print('Clicked');
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return FormScreen();
+          }));
+        },
       ),
     );
   }
@@ -128,23 +143,58 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   // int tmpId = biodata.id;
                                   // String id = tmpId.toString();
-                                  String id = biodata.id;
-                                  api.delete(id).then((result) {
-                                    if (result != null) {
-                                      print("SUKSES");
-                                      _scaffoldState.currentState
-                                          .showSnackBar(SnackBar(
-                                        content: Text("Hapus data sukses"),
-                                      ));
-                                      setState(() {});
-                                    } else {
-                                      print("GAGAL");
-                                      _scaffoldState.currentState
-                                          .showSnackBar(SnackBar(
-                                        content: Text("Hapus data gagal"),
-                                      ));
-                                    }
-                                  });
+                                  // set up the buttons
+                                  Widget cancelButton = FlatButton(
+                                    child: Text("Batal"),
+                                    onPressed: () {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                    },
+                                  );
+                                  Widget continueButton = FlatButton(
+                                    child: Text("Ya"),
+                                    onPressed: () {
+                                      String id = biodata.id;
+                                      api.delete(id).then((result) {
+                                        if (result != null) {
+                                          print("SUKSES");
+                                          _scaffoldState.currentState
+                                              .showSnackBar(SnackBar(
+                                            content: Text("Hapus data sukses"),
+                                          ));
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pop('dialog');
+                                          setState(() {});
+                                        } else {
+                                          print("GAGAL");
+                                          _scaffoldState.currentState
+                                              .showSnackBar(SnackBar(
+                                            content: Text("Hapus data gagal"),
+                                          ));
+                                        }
+                                      });
+                                    },
+                                  );
+
+                                  // set up the AlertDialog
+                                  AlertDialog alert = AlertDialog(
+                                    title: Text("Hapus"),
+                                    content:
+                                        Text("Yakin ingin menghapus data ini?"),
+                                    actions: [
+                                      cancelButton,
+                                      continueButton,
+                                    ],
+                                  );
+
+                                  // show the dialog
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return alert;
+                                    },
+                                  );
                                 },
                               ),
                             ],
@@ -158,5 +208,16 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: allBiodata.length,
             ),
     );
+  }
+
+  void logout() async {
+    var res = await ApiServiceAuth().getData('/auth/logout');
+    var body = json.decode(res.body);
+    if (body['success']) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.remove('user');
+      localStorage.remove('token');
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    }
   }
 }

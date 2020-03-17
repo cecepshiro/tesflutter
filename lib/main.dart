@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'package:bioapp/view/biodata/HomeScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:bioapp/screen/login.dart';
-import 'package:bioapp/screen/home.dart';
+import 'package:bioapp/view/auth/login.dart';
+import 'package:bioapp/view/auth/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // void main() => runApp(MyApp());
@@ -35,8 +34,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      // home: CheckAuth(),
-      home: HomeScreen(),
+      home: CheckAuth(),
+      // home: HomeScreen(),
     );
   }
 }

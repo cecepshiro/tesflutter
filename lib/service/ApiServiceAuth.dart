@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Network {
+class ApiServiceAuth {
   //Within the Network class, define String _url = 'http://localhost:8000/api/v1 this is basically the BASE_URL for our Laravel API.
   final String _url = 'http://testflutter.compunerds.id/api';
 

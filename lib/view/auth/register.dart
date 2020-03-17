@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'package:bioapp/service/ApiServiceAuth.dart';
+import 'package:bioapp/view/biodata/HomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:bioapp/network_utils/api.dart';
-import 'package:bioapp/screen/home.dart';
-import 'package:bioapp/screen/login.dart';
+import 'package:bioapp/view/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Register extends StatefulWidget {
@@ -238,7 +238,7 @@ class _RegisterState extends State<Register> {
       'lname': lname
     };
 
-    var res = await Network().authData(data, '/auth/register');
+    var res = await ApiServiceAuth().authData(data, '/auth/register');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -246,7 +246,7 @@ class _RegisterState extends State<Register> {
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => Home()),
+        new MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     }
 

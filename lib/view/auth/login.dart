@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:bioapp/service/ApiServiceAuth.dart';
 import 'package:flutter/material.dart';
-import 'package:bioapp/network_utils/api.dart';
-import 'package:bioapp/screen/home.dart';
+import 'package:bioapp/view/biodata/HomeScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bioapp/screen/register.dart';
+import 'package:bioapp/view/auth/register.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -174,7 +174,7 @@ class _LoginState extends State<Login> {
     });
     var data = {'email': email, 'password': password};
 
-    var res = await Network().authData(data, '/auth/login');
+    var res = await ApiServiceAuth().authData(data, '/auth/login');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -182,7 +182,7 @@ class _LoginState extends State<Login> {
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => Home()),
+        new MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     } else {
       _showMsg(body['message']);
