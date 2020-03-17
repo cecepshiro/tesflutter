@@ -70,14 +70,13 @@ class ApiService {
   Future<Biodata> delete(String id) async {
     Map<String, dynamic> inputMap = {'id': id};
     final response = await http.post(
-      baseUrl + "biodata/delete",
+      baseUrl + "biodata/destroy",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
       },
       body: inputMap,
     );
-
     r = BiodataResponse.fromJson(json.decode(response.body));
     if (response.statusCode == 200) {
       Biodata data = r.data[0];

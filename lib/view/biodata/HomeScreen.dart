@@ -130,12 +130,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   String id = tmpId.toString();
                                   api.delete(id).then((result) {
                                     if (result != null) {
+                                      print("SUKSES");
                                       _scaffoldState.currentState
                                           .showSnackBar(SnackBar(
                                         content: Text("Hapus data sukses"),
                                       ));
                                       setState(() {});
                                     } else {
+                                      print("GAGAL");
                                       _scaffoldState.currentState
                                           .showSnackBar(SnackBar(
                                         content: Text("Hapus data gagal"),
