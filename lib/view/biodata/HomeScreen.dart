@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldState,
       appBar: AppBar(
         title: Text(
-          'Simple CRUD Apps',
+          'Bioapp',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.orange[400],
@@ -126,8 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     style: TextStyle(color: Colors.white)),
                                 color: Colors.orange[400],
                                 onPressed: () {
-                                  int tmpId = biodata.id;
-                                  String id = tmpId.toString();
+                                  // int tmpId = biodata.id;
+                                  // String id = tmpId.toString();
+                                  String id = biodata.id;
                                   api.delete(id).then((result) {
                                     if (result != null) {
                                       print("SUKSES");

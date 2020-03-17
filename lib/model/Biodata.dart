@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Biodata {
-  final int id;
+  final String id;
   final String divisi;
   final String alamat;
   final String socialMedia;
@@ -10,7 +10,7 @@ class Biodata {
 
   factory Biodata.fromJson(Map<String, dynamic> map) {
     return Biodata(
-        id: map["id"] as int,
+        id: map["id"] as String,
         divisi: map["divisi"] as String,
         alamat: map["alamat"] as String,
         socialMedia: map["social_media"] as String);

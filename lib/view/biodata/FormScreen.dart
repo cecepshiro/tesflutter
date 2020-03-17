@@ -90,8 +90,11 @@ class _FormScreenState extends State<FormScreen> {
                           divisi: ctrlDivisi.text,
                           alamat: ctrlAlamat.text,
                           socialMedia: ctrlsocialMedia.text);
+                      print("TESSSS");
+                      print(this.widget.biodata);
                       if (this.widget.biodata != null) {
                         api.update(dataIn).then((result) {
+                          print(result);
                           if (result != null) {
                             Navigator.pop(_scaffoldState.currentState.context);
                           } else {
@@ -103,8 +106,10 @@ class _FormScreenState extends State<FormScreen> {
                       } else {
                         api.create(dataIn).then((result) {
                           if (result != null) {
+                            print("SUKSES");
                             Navigator.pop(_scaffoldState.currentState.context);
                           } else {
+                            print("GAGAL");
                             _scaffoldState.currentState.showSnackBar(SnackBar(
                               content: Text("Simpan data gagal"),
                             ));

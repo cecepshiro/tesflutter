@@ -10,6 +10,7 @@ class BiodataResponse {
   factory BiodataResponse.fromJson(Map<String, dynamic> map) {
     // cast dynamic object to model (Biodata)
     var allBiodata = map['data'] as List;
+    print(allBiodata);
     List<Biodata> biodataList =
         allBiodata.map((i) => Biodata.fromJson(i)).toList();
     return BiodataResponse(

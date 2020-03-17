@@ -32,6 +32,7 @@ class ApiService {
       },
       body: inputMap,
     );
+    // print("TES WOI");
 
     r = BiodataResponse.fromJson(json.decode(response.body));
     if (response.statusCode == 200) {
@@ -50,7 +51,7 @@ class ApiService {
       'id': biodata.id
     };
     final response = await http.post(
-      baseUrl + "/biodata/update",
+      baseUrl + "biodata/update",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
